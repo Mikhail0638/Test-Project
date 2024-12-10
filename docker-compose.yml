@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: test-project
+    container_name: test-project
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx_test-project
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_test-project
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: 123451
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_test-project
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

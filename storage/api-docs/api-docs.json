@@ -1,0 +1,299 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Notebook API",
+        "description": "API записной книжки",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebook/": {
+            "get": {
+                "tags": [
+                    "Записная книжка"
+                ],
+                "summary": "Получение списка контактов",
+                "operationId": "81cc975e33dd570ff56ea64ace358229",
+                "responses": {
+                    "200": {
+                        "description": "Список контактов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "fullname": {
+                                                "type": "string",
+                                                "example": "Романов Иван Иванович"
+                                            },
+                                            "company": {
+                                                "type": "string",
+                                                "example": "ООО 'ААА'"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "79111111111"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "test@mail.ru"
+                                            },
+                                            "birthdate": {
+                                                "type": "string",
+                                                "example": "1997-01-01"
+                                            },
+                                            "photo": {
+                                                "type": "string",
+                                                "example": "img/photo.jpg"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Записная книжка"
+                ],
+                "summary": "Создание новой записи в записной книжке",
+                "operationId": "2e96b67c078f2be44e50bb8a27162d4c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string",
+                                        "example": "Романов Иван Иванович"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "example": "ООО 'ААА'"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "79111111111"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@mail.ru"
+                                    },
+                                    "birthdate": {
+                                        "type": "string",
+                                        "example": "1997-01-01"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "img/photo.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Запись в записной книжке успешно создана"
+                    },
+                    "400": {
+                        "description": "Неверный запрос"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            }
+        },
+        "/api/v1/notebook/{id}": {
+            "get": {
+                "tags": [
+                    "Записная книжка"
+                ],
+                "summary": "Получение записи в записной книжке по id",
+                "operationId": "a07418b0decb4969394e79f597aa543f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID записи в записной книжке",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Данные контакта в записной книжке",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "fullname": {
+                                            "type": "string",
+                                            "example": "Романов Иван Иванович"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "example": "ООО 'ААА'"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "79111111111"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "test@mail.ru"
+                                        },
+                                        "birthdate": {
+                                            "type": "string",
+                                            "example": "1997-01-01"
+                                        },
+                                        "photo": {
+                                            "type": "string",
+                                            "example": "img/photo.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Запись не найдена"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Записная книжка"
+                ],
+                "summary": "Обновление записи в записной книжке по id",
+                "operationId": "36d82d17bc829073e309f8316e61a7b1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID записи в записной книжке",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string",
+                                        "example": "Романов Иван Иванович"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "example": "ООО 'ААА'"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "79111111111"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@mail.ru"
+                                    },
+                                    "birthdate": {
+                                        "type": "string",
+                                        "example": "1997-01-01"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "img/photo.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Запись обновлена"
+                    },
+                    "404": {
+                        "description": "Запись не найдена"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Записная книжка"
+                ],
+                "summary": "Удаление записи в записной книжке",
+                "operationId": "6be314584e9cc2d22f7dff1d0b286f21",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID записи в записной кнжике для удаления",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Запись успешно удалена"
+                    },
+                    "404": {
+                        "description": "Запись не найдена"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Записная книжка",
+            "description": "Записная книжка"
+        }
+    ]
+}
