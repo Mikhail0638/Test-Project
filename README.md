@@ -43,11 +43,15 @@ API записной книжки
 ## Docker
 
 Данные MySQL:
+
 Логин: root
+
 Пароль: 123451
+
 База данных: notebook
 
 Веб-сервер: localhost:8000
+
 PhpMyAdmin: localhost:8080
 
 
